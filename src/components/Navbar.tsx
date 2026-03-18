@@ -58,9 +58,6 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <button className="p-2 rounded-full hover:bg-white/5 transition-colors">
-            <Moon size={20} className="text-white/70" />
-          </button>
           <Link to="/contact" className="btn-primary py-2 px-6 text-sm">
             Contact Us
           </Link>

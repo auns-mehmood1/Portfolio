@@ -17,10 +17,10 @@ const ContactForm = () => {
     // NOTE: Replace these with your actual EmailJS keys
     // SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY
     emailjs.sendForm(
-      "service_t2e5432",
-      "template_seuly1p",
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
       formRef.current,
-      "E5sUT-cF-h8oclq9-"
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
     )
     .then(() => {
       setStatus('success');

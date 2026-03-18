@@ -20,13 +20,21 @@ const Footer = () => {
             Your partner in digital transformation.
           </p>
           <div className="flex gap-4">
-            {[Twitter, Linkedin, Instagram, Github].map((Icon, i) => (
-              <a 
-                key={i} 
-                href="#" 
+            {[
+              { Icon: Twitter, href: 'https://twitter.com/', label: 'Twitter' },
+              { Icon: Linkedin, href: 'https://www.linkedin.com/', label: 'LinkedIn' },
+              { Icon: Instagram, href: 'https://www.instagram.com/', label: 'Instagram' },
+              { Icon: Github, href: 'https://github.com/', label: 'GitHub' },
+            ].map(({ Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
                 className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/40 hover:bg-brand-purple hover:text-white transition-all"
               >
-                <Icon size={18} />
+                <Icon size={18} aria-hidden="true" />
               </a>
             ))}
           </div>
@@ -72,17 +80,47 @@ const Footer = () => {
           <ul className="space-y-4">
             <li className="flex items-center gap-3 text-white/40 text-sm">
               <Mail size={18} className="text-brand-purple" />
-              metabufsol@gmail.com
+              <a
+                href="mailto:dev@metabufsol.com"
+                className="hover:text-white transition-colors"
+              >
+                dev@metabufsol.com
+              </a>
             </li>
             <li className="flex items-center gap-3 text-white/40 text-sm">
               <Phone size={18} className="text-brand-purple" />
-              +1 (555) 000-0000
+              <a href="tel:+14254940912" className="hover:text-white transition-colors">
+                +1 (425) 494-0912
+              </a>
             </li>
             <li className="flex items-start gap-3 text-white/40 text-sm">
               <MapPin size={18} className="text-brand-purple shrink-0" />
               123 Innovation Way, <br />Tech City, TC 12345
             </li>
           </ul>
+
+          <div className="mt-8">
+            <h4 className="font-bold mb-4">Backlinks</h4>
+            <ul className="space-y-3">
+              {[
+                { label: 'React', href: 'https://react.dev/' },
+                { label: 'Vite', href: 'https://vite.dev/' },
+                { label: 'Tailwind CSS', href: 'https://tailwindcss.com/' },
+                { label: 'EmailJS', href: 'https://www.emailjs.com/' },
+              ].map(({ label, href }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/40 text-sm hover:text-brand-purple transition-colors"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -91,8 +129,22 @@ const Footer = () => {
           © {new Date().getFullYear()} MetaBuf Sol. All rights reserved.
         </p>
         <div className="flex gap-6">
-          <a href="#" className="text-white/20 text-xs hover:text-white transition-colors">Privacy Policy</a>
-          <a href="#" className="text-white/20 text-xs hover:text-white transition-colors">Terms of Service</a>
+          <a
+            href="https://metabufsol.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/20 text-xs hover:text-white transition-colors"
+          >
+            Privacy Policy
+          </a>
+          <a
+            href="https://metabufsol.com/terms"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/20 text-xs hover:text-white transition-colors"
+          >
+            Terms of Service
+          </a>
         </div>
       </div>
     </footer>

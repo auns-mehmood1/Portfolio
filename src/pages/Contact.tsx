@@ -28,13 +28,13 @@ const Contact = () => {
                 { 
                   icon: Mail, 
                   title: 'Email Us', 
-                  value: 'metabufsol@gmail.com',
+                  value: 'dev@metabufsol.com',
                   desc: 'Our friendly team is here to help.'
                 },
                 { 
                   icon: Phone, 
                   title: 'Call Us', 
-                  value: '+1 (555) 000-0000',
+                  value: '+1 (425) 494-0912',
                   desc: 'Mon-Fri from 9am to 6pm.'
                 },
                 { 
