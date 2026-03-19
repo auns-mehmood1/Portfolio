@@ -47,10 +47,12 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-purple to-brand-blue flex items-center justify-center text-[color:var(--text-inverse)] font-bold text-xl group-hover:rotate-12 transition-transform">
-            M
-          </div>
-          <span className="text-xl font-display font-bold tracking-tight">
+          <img
+            src={theme === 'dark' ? '/assets/logo-dark.png' : '/assets/logo-light.png'}
+            alt="MetaBuf Solutions logo"
+            className="h-10 w-auto object-contain group-hover:scale-[1.02] transition-transform"
+          />
+          <span className="text-xl font-display font-bold tracking-tight text-[color:var(--text-primary)]">
             MetaBuf <span className="gradient-text">Sol.</span>
           </span>
         </Link>

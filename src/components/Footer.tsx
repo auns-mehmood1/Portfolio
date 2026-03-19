@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Github, Twitter, Linkedin, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 
 const Footer = () => {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window === 'undefined') return 'dark';
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const observer = new MutationObserver(() => {
+      setTheme(root.classList.contains('dark') ? 'dark' : 'light');
+    });
+    observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <footer className="bg-dark-bg border-t border-black/10 dark:border-white/10 pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div className="space-y-6">
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-purple to-brand-blue flex items-center justify-center text-[color:var(--text-inverse)] font-bold text-xl">
-              M
-            </div>
-            <span className="text-xl font-display font-bold tracking-tight">
+          <Link to="/" className="inline-flex items-center gap-2 group">
+            <img
+              src={theme === 'dark' ? '/assets/logo-dark.png' : '/assets/logo-light.png'}
+              alt="MetaBuf Solutions logo"
+              className="h-12 w-auto object-contain group-hover:scale-[1.02] transition-transform"
+            />
+            <span className="text-xl font-display font-bold tracking-tight text-[color:var(--text-primary)]">
               MetaBuf <span className="gradient-text">Sol.</span>
             </span>
           </Link>
