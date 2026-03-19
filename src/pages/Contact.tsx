@@ -17,7 +17,7 @@ const Contact = () => {
               <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
                 Let's <span className="gradient-text">Connect</span>
               </h1>
-              <p className="text-white/60 text-lg mb-12 leading-relaxed max-w-lg">
+              <p className="text-[color:var(--text-muted)] text-lg mb-12 leading-relaxed max-w-lg">
                 Have a project in mind? We'd love to hear from you. 
                 Fill out the form and our team will get back to you within 24 hours.
               </p>
@@ -51,13 +51,13 @@ const Contact = () => {
                   transition={{ delay: 0.2 + idx * 0.1 }}
                   className="flex gap-6 group"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-brand-purple/20 group-hover:border-brand-purple/50 transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-black/5 border border-black/10 dark:bg-white/5 dark:border-white/10 flex items-center justify-center group-hover:bg-brand-purple/20 group-hover:border-brand-purple/50 transition-all">
                     <item.icon className="text-brand-purple" size={24} />
                   </div>
                   <div>
                     <h4 className="font-bold text-lg mb-1">{item.title}</h4>
-                    <p className="text-white/80 font-medium mb-1">{item.value}</p>
-                    <p className="text-sm text-white/40">{item.desc}</p>
+                    <p className="text-[color:var(--text-secondary)] font-medium mb-1">{item.value}</p>
+                    <p className="text-sm text-[color:var(--text-faint)]">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}

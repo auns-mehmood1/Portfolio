@@ -1,17 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { ChevronRight, Play, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '../lib/utils';
 
 const Hero = () => {
+  const heroVideoUrl = '/videos/hero-background.mp4';
+  const [canAnimate, setCanAnimate] = useState(true);
+  const [videoAvailable, setVideoAvailable] = useState(true);
+
+  useEffect(() => {
+    // Respect reduced-motion without breaking the rest of the hero.
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    if (prefersReducedMotion) setCanAnimate(false);
+  }, []);
+
   return (
     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+      {/* Video background (behind gradients/content) */}
+      {canAnimate && videoAvailable && (
+        <video
+          src={heroVideoUrl}
+          className="absolute inset-0 w-full h-full object-cover -z-20 opacity-80 pointer-events-none"
+          muted
+          loop
+          autoPlay
+          playsInline
+          preload="metadata"
+          onError={() => setVideoAvailable(false)}
+          disablePictureInPicture
+        />
+      )}
+
       {/* Background Gradients */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-purple/20 blur-[120px] rounded-full" />
         <div className="absolute bottom-[10%] right-[-10%] w-[40%] h-[40%] bg-brand-blue/20 blur-[120px] rounded-full" />
       </div>
+
+      {/* Readability overlay on top of video */}
+      <div className="absolute inset-0 -z-15 bg-black/10 dark:bg-black/35 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         <motion.div
@@ -23,7 +51,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-brand-purple text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 border border-black/10 dark:bg-white/5 dark:border-white/10 text-brand-purple text-sm font-medium mb-6"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-purple opacity-75"></span>
@@ -31,17 +59,17 @@ const Hero = () => {
             </span>
             Now accepting new projects
           </motion.div>
-          
+
           <h1 className="text-5xl md:text-7xl font-display font-bold leading-[1.1] mb-6">
             Where <span className="gradient-text">Innovation</span> <br />
             Meets Execution
           </h1>
-          
-          <p className="text-lg text-white/60 mb-10 max-w-lg leading-relaxed">
-            MetaBuf Sol. is a premier digital agency crafting high-performance 
+
+          <p className="text-lg text-[color:var(--text-muted)] mb-10 max-w-lg leading-relaxed">
+            MetaBuf Sol. is a premier digital agency crafting high-performance
             software solutions. We turn complex challenges into seamless digital experiences.
           </p>
-          
+
           <div className="flex flex-wrap gap-4">
             <Link to="/contact" className="btn-primary flex items-center gap-2 group">
               Get Started

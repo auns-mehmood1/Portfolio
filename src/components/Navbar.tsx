@@ -7,6 +7,12 @@ import { cn } from '../lib/utils';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window === 'undefined') return 'dark';
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light' || saved === 'dark') return saved;
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  });
   const location = useLocation();
 
   useEffect(() => {
@@ -16,6 +22,11 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -29,14 +40,14 @@ const Navbar = () => {
     <nav
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b',
-        scrolled 
-          ? 'bg-dark-bg/80 backdrop-blur-lg border-white/10 py-4' 
+        scrolled
+          ? 'bg-white/80 backdrop-blur-lg border-black/10 dark:bg-dark-bg/80 dark:border-white/10 py-4'
           : 'bg-transparent border-transparent py-6'
       )}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-purple to-brand-blue flex items-center justify-center text-white font-bold text-xl group-hover:rotate-12 transition-transform">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-purple to-brand-blue flex items-center justify-center text-[color:var(--text-inverse)] font-bold text-xl group-hover:rotate-12 transition-transform">
             M
           </div>
           <span className="text-xl font-display font-bold tracking-tight">
@@ -52,7 +63,9 @@ const Navbar = () => {
               to={link.path}
               className={cn(
                 'text-sm font-medium transition-colors hover:text-brand-purple',
-                location.pathname === link.path ? 'text-brand-purple' : 'text-white/70'
+                location.pathname === link.path
+                  ? 'text-brand-purple'
+                  : 'text-[color:var(--text-secondary)]'
               )}
             >
               {link.name}
@@ -61,16 +74,59 @@ const Navbar = () => {
           <Link to="/contact" className="btn-primary py-2 px-6 text-sm">
             Contact Us
           </Link>
+          <button
+            type="button"
+            aria-label="Toggle dark mode"
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="p-2 rounded-full bg-black/5 border border-black/10 hover:bg-black/10 dark:bg-white/5 dark:border-white/10 dark:hover:bg-white/10 transition-colors"
+          >
+            {theme === 'dark' ? (
+              <Sun size={20} className="text-[color:var(--text-primary)]" />
+            ) : (
+              <span
+                className={
+                  // Show visible border in both modes; in light mode use a visible gray border, in dark use current subtle border
+                  "inline-flex items-center justify-center rounded-full " +
+                  (theme === "dark"
+                    ? "bg-white/5 border border-white/10"
+                    : "bg-black/5 border border-[#c4c4c4]")
+                }
+                style={{ width: 32, height: 32 }}
+              >
+                <Moon size={20} className="text-[color:var(--text-primary)]" />
+              </span>
+            )}
+          </button>
         </div>
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden flex items-center gap-4">
-          <button className="p-2 rounded-full hover:bg-white/5 transition-colors">
-            <Moon size={20} className="text-white/70" />
+          <button
+            type="button"
+            aria-label="Toggle dark mode"
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="p-2 rounded-full bg-black/5 border border-black/10 hover:bg-black/10 dark:bg-white/5 dark:border-white/10 dark:hover:bg-white/10 transition-colors"
+          >
+            {theme === 'dark' ? (
+              <Sun size={20} className="text-[color:var(--text-primary)]" />
+            ) : (
+              <span
+                className={
+                  // Show visible border in both modes; in light mode use a visible gray border, in dark use current subtle border
+                  "inline-flex items-center justify-center rounded-full " +
+                  (theme === "dark"
+                    ? "bg-white/5 border border-white/10"
+                    : "bg-black/5 border border-[#c4c4c4]")
+                }
+                style={{ width: 32, height: 32 }}
+              >
+                <Moon size={20} className="text-[color:var(--text-primary)]" />
+              </span>
+            )}
           </button>
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 text-white/70 hover:text-white"
+            className="p-2 text-[color:var(--text-secondary)] hover:text-[color:var(--text-primary)]"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -84,7 +140,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-dark-card border-b border-white/10 overflow-hidden"
+            className="md:hidden bg-white/90 border-b border-black/10 dark:bg-dark-card dark:border-white/10 overflow-hidden"
           >
             <div className="px-6 py-8 flex flex-col gap-6">
               {navLinks.map((link) => (
@@ -92,10 +148,10 @@ const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium text-white/70 hover:text-white flex items-center justify-between"
+                  className="text-lg font-medium text-[color:var(--text-secondary)] hover:text-[color:var(--text-primary)] flex items-center justify-between"
                 >
                   {link.name}
-                  <ChevronRight size={18} className="text-white/30" />
+                  <ChevronRight size={18} className="text-[color:var(--text-disabled)]" />
                 </Link>
               ))}
               <Link

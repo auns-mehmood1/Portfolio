@@ -34,7 +34,7 @@ const Testimonials = () => {
           <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
             Client <span className="gradient-text">Feedback</span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className="text-[color:var(--text-muted)] max-w-2xl mx-auto">
             Don't just take our word for it. Here's what our clients have to say about working with us.
           </p>
         </div>
@@ -49,13 +49,13 @@ const Testimonials = () => {
               transition={{ delay: idx * 0.1 }}
               className="glass-card p-8 relative"
             >
-              <Quote className="absolute top-6 right-8 text-white/5 w-12 h-12" />
+              <Quote className="absolute top-6 right-8 text-[color:var(--text-decorative)] w-12 h-12" />
               <div className="flex gap-1 mb-6">
                 {[...Array(t.rating)].map((_, i) => (
                   <Star key={i} size={16} className="fill-brand-purple text-brand-purple" />
                 ))}
               </div>
-              <p className="text-white/80 mb-8 italic leading-relaxed">
+              <p className="text-[color:var(--text-secondary)] mb-8 italic leading-relaxed">
                 "{t.feedback}"
               </p>
               <div className="flex items-center gap-4">
@@ -64,7 +64,7 @@ const Testimonials = () => {
                 </div>
                 <div>
                   <h4 className="font-bold">{t.name}</h4>
-                  <p className="text-xs text-white/40">{t.role} @ {t.company}</p>
+                  <p className="text-xs text-[color:var(--text-faint)]">{t.role} @ {t.company}</p>
                 </div>
               </div>
             </motion.div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import ProjectCard from '../components/ProjectCard';
 import { cn } from '../lib/utils';
@@ -52,19 +52,45 @@ const projects = [
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('All');
+  const heroVideoUrl = '/videos/projects-background.mp4';
+  const [canAnimate, setCanAnimate] = useState(true);
+  const [videoAvailable, setVideoAvailable] = useState(true);
+
+  useEffect(() => {
+    // Respect reduced-motion without affecting the rest of the page layout.
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    if (prefersReducedMotion) setCanAnimate(false);
+  }, []);
 
   const filteredProjects = activeCategory === 'All' 
     ? projects 
     : projects.filter(p => p.category === activeCategory);
 
   return (
-    <div className="pt-32 pb-24 min-h-screen">
+    <div className="relative pt-32 pb-24 min-h-screen">
+      {/* Background video layer */}
+      {canAnimate && videoAvailable && (
+        <video
+          src={heroVideoUrl}
+          className="absolute inset-0 w-full h-full object-cover -z-20 opacity-80 pointer-events-none"
+          muted
+          loop
+          autoPlay
+          playsInline
+          preload="metadata"
+          onError={() => setVideoAvailable(false)}
+          disablePictureInPicture
+        />
+      )}
+      {/* Readability overlay */}
+      <div className="absolute inset-0 -z-15 bg-black/10 dark:bg-black/35 pointer-events-none" />
+
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
             Our <span className="gradient-text">Projects</span>
           </h1>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className="text-[color:var(--text-muted)] max-w-2xl mx-auto">
             Explore our portfolio of successful projects across various industries and technologies.
           </p>
         </div>
@@ -78,8 +104,8 @@ const Projects = () => {
               className={cn(
                 "px-6 py-2 rounded-full text-sm font-medium transition-all duration-300",
                 activeCategory === cat 
-                  ? "bg-brand-purple text-white shadow-lg shadow-brand-purple/20" 
-                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white"
+                  ? "bg-brand-purple text-[color:var(--text-inverse)] shadow-lg shadow-brand-purple/20" 
+                  : "bg-black/5 dark:bg-white/5 text-[color:var(--text-faint)] hover:bg-black/10 dark:hover:bg-white/10 hover:text-[color:var(--text-primary)]"
               )}
             >
               {cat}

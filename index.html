@@ -10,6 +10,24 @@
     />
     <meta name="robots" content="index,follow" />
 
+    <script>
+      // Set initial theme before React renders to avoid a flash.
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersDark =
+            window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = saved === 'light' || saved === 'dark' ? saved : prefersDark ? 'dark' : 'light';
+          document.documentElement.classList.toggle('dark', theme === 'dark');
+        } catch (e) {
+          // If storage is blocked, fall back to system preference.
+          var prefersDark =
+            window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', prefersDark);
+        }
+      })();
+    </script>
+
     <link rel="canonical" href="https://metabufsol.com/" />
 
     <!-- Open Graph -->

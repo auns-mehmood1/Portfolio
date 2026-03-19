@@ -1,11 +1,20 @@
 import React from 'react';
 
 export default function FloatingWhatsAppButton() {
+  // WhatsApp "wa.me" expects a digits-only phone number (no leading "+").
+  const phoneNumber = '14254940912';
+  const whatsappUrl = `https://wa.me/${phoneNumber}`;
+
+  const handleClick = () => {
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <button
       type="button"
       aria-label="WhatsApp"
-      className="fixed bottom-6 right-6 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/30 transition-transform hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-dark-bg"
+      onClick={handleClick}
+      className="fixed bottom-6 right-6 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-[color:var(--text-inverse)] shadow-lg shadow-black/30 transition-transform hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-dark-bg"
     >
       <span className="sr-only">WhatsApp</span>
       <svg

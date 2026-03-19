@@ -34,7 +34,7 @@ const Home = () => {
             {/* Stats Overlay */}
             <div className="absolute -bottom-6 -right-6 glass-card p-6 shadow-2xl">
               <div className="text-3xl font-bold gradient-text">99%</div>
-              <div className="text-xs text-white/40 uppercase tracking-widest">Client Satisfaction</div>
+              <div className="text-xs text-[color:var(--text-faint)] uppercase tracking-widest">Client Satisfaction</div>
             </div>
           </motion.div>
 
@@ -46,7 +46,7 @@ const Home = () => {
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
               Innovation <span className="gradient-text">Meets</span> Execution
             </h2>
-            <p className="text-white/60 mb-8 leading-relaxed">
+            <p className="text-[color:var(--text-muted)] mb-8 leading-relaxed">
               MetaBuf Sol. is more than just a software agency. We are your strategic 
               partners in digital growth. Our focus is on delivering high-impact 
               solutions that combine cutting-edge innovation with flawless execution.
@@ -59,7 +59,7 @@ const Home = () => {
                 'Agile development methodology',
                 'Focus on long-term scalability'
               ].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-white/80">
+                <li key={item} className="flex items-center gap-3 text-[color:var(--text-secondary)]">
                   <CheckCircle2 className="text-brand-green" size={20} />
                   {item}
                 </li>
@@ -94,7 +94,7 @@ const Home = () => {
               Let's build something <br />
               <span className="gradient-text">great together</span>
             </motion.h2>
-            <p className="text-white/60 mb-10 max-w-xl mx-auto text-lg">
+            <p className="text-[color:var(--text-muted)] mb-10 max-w-xl mx-auto text-lg">
               Ready to take your digital presence to the next level? 
               Our team is ready to help you achieve your goals.
             </p>

@@ -74,7 +74,7 @@ const Services = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-white/60 max-w-2xl mx-auto"
+            className="text-[color:var(--text-muted)] max-w-2xl mx-auto"
           >
             We provide comprehensive digital solutions tailored to your business needs. 
             From concept to deployment, we've got you covered.
@@ -98,12 +98,12 @@ const Services = () => {
               <h3 className="text-xl font-bold mb-3 group-hover:text-brand-purple transition-colors">
                 {service.title}
               </h3>
-              <p className="text-white/60 mb-6 leading-relaxed">
+              <p className="text-[color:var(--text-muted)] mb-6 leading-relaxed">
                 {service.description}
               </p>
               <Link 
                 to="/contact" 
-                className="inline-flex items-center gap-2 text-sm font-medium text-white/40 group-hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-medium text-[color:var(--text-faint)] group-hover:text-[color:var(--text-primary)] transition-colors"
               >
                 Learn More
                 <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

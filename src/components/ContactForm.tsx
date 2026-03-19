@@ -22,14 +22,14 @@ const ContactForm = () => {
       formRef.current,
       import.meta.env.VITE_EMAILJS_PUBLIC_KEY
     )
-    .then(() => {
-      setStatus('success');
-      formRef.current?.reset();
-    })
-    .catch((error) => {
-      setStatus('error');
-      setErrorMessage('Something went wrong. Please try again later.');
-    });
+      .then(() => {
+        setStatus('success');
+        formRef.current?.reset();
+      })
+      .catch((error) => {
+        setStatus('error');
+        setErrorMessage('Something went wrong. Please try again later.');
+      });
   };
 
   return (
@@ -46,10 +46,10 @@ const ContactForm = () => {
               <CheckCircle size={40} className="text-green-500" />
             </div>
             <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
-            <p className="text-white/60 mb-8">
+            <p className="text-[color:var(--text-muted)] mb-8">
               Thank you for reaching out. We'll get back to you as soon as possible.
             </p>
-            <button 
+            <button
               onClick={() => setStatus('idle')}
               className="btn-secondary"
             >
@@ -67,7 +67,7 @@ const ContactForm = () => {
           >
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label htmlFor="user_name" className="text-sm font-medium text-white/60 ml-1">
+                <label htmlFor="user_name" className="text-sm font-medium text-[color:var(--text-secondary)] ml-1">
                   Full Name
                 </label>
                 <input
@@ -76,11 +76,15 @@ const ContactForm = () => {
                   id="user_name"
                   required
                   placeholder="John Doe"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-purple transition-colors"
+                  className="w-full rounded-xl px-4 py-3 transition-colors
+                  bg-[color:var(--field-bg)] border border-[color:var(--field-border)]
+                  text-[color:var(--text-primary)] placeholder:text-[color:var(--text-faint)]
+                  focus:outline-none focus:border-[color:var(--field-border-focus)] focus:ring-2 focus:ring-brand-purple/30
+                  hover:border-[color:var(--field-border-hover)]"
                 />
               </div>
               <div className="space-y-2">
-                <label htmlFor="user_phone" className="text-sm font-medium text-white/60 ml-1">
+                <label htmlFor="user_phone" className="text-sm font-medium text-[color:var(--text-secondary)] ml-1">
                   Phone Number
                 </label>
                 <input
@@ -89,26 +93,34 @@ const ContactForm = () => {
                   id="user_phone"
                   required
                   placeholder="+1 (555) 000-0000"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-purple transition-colors"
+                  className="w-full rounded-xl px-4 py-3 transition-colors
+                  bg-[color:var(--field-bg)] border border-[color:var(--field-border)]
+                  text-[color:var(--text-primary)] placeholder:text-[color:var(--text-faint)]
+                  focus:outline-none focus:border-[color:var(--field-border-focus)] focus:ring-2 focus:ring-brand-purple/30
+                  hover:border-[color:var(--field-border-hover)]"
                 />
               </div>
             </div>
-            
+
             <div className="space-y-2">
-                <label htmlFor="user_email" className="text-sm font-medium text-white/60 ml-1">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  name="from_email"
-                  id="user_email"
-                  required
-                  placeholder="john@example.com"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-purple transition-colors"
-                />
-              </div>
+              <label htmlFor="user_email" className="text-sm font-medium text-[color:var(--text-secondary)] ml-1">
+                Email Address
+              </label>
+              <input
+                type="email"
+                name="from_email"
+                id="user_email"
+                required
+                placeholder="john@example.com"
+                className="w-full rounded-xl px-4 py-3 transition-colors
+                  bg-[color:var(--field-bg)] border border-[color:var(--field-border)]
+                  text-[color:var(--text-primary)] placeholder:text-[color:var(--text-faint)]
+                  focus:outline-none focus:border-[color:var(--field-border-focus)] focus:ring-2 focus:ring-brand-purple/30
+                  hover:border-[color:var(--field-border-hover)]"
+              />
+            </div>
             <div className="space-y-2">
-              <label htmlFor="message" className="text-sm font-medium text-white/60 ml-1">
+              <label htmlFor="message" className="text-sm font-medium text-[color:var(--text-secondary)] ml-1">
                 Your Message
               </label>
               <textarea
@@ -117,7 +129,11 @@ const ContactForm = () => {
                 required
                 rows={5}
                 placeholder="Tell us about your project..."
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-purple transition-colors resize-none"
+                className="w-full rounded-xl px-4 py-3 transition-colors resize-none
+                bg-[color:var(--field-bg)] border border-[color:var(--field-border)]
+                text-[color:var(--text-primary)] placeholder:text-[color:var(--text-faint)]
+                focus:outline-none focus:border-[color:var(--field-border-focus)] focus:ring-2 focus:ring-brand-purple/30
+                hover:border-[color:var(--field-border-hover)]"
               />
             </div>
 
