@@ -37,7 +37,7 @@ const AnimatedPercent = ({ value, start }: { value: number; start: boolean }) =>
 
 const Home = () => {
   const aboutImageRef = useRef<HTMLDivElement | null>(null);
-  const isAboutImageInView = useInView(aboutImageRef, { once: true, amount: 0.35 });
+  const isAboutImageInView = useInView(aboutImageRef, { once: false, amount: 0.35 });
 
   return (
     <div className="pt-20">
