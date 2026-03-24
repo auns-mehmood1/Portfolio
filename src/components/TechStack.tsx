@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { sectionVariants, itemVariants } from '../lib/motion';
+import SectionBorderReveal from './SectionBorderReveal';
 
 const techGroups = [
   {
@@ -54,7 +55,7 @@ const TechStack = () => {
       whileInView="visible"
       viewport={{ once: true }}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <SectionBorderReveal className="max-w-7xl mx-auto" innerClassName="px-6 md:px-8 py-8 md:py-10">
 
         <motion.div variants={itemVariants} className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div className="max-w-xl">
@@ -111,7 +112,7 @@ const TechStack = () => {
           ))}
         </div>
 
-      </div>
+      </SectionBorderReveal>
     </motion.section>
   );
 };

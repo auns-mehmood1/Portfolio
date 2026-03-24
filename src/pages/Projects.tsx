@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import ProjectCard from '../components/ProjectCard';
+import SectionBorderReveal from '../components/SectionBorderReveal';
 import { cn } from '../lib/utils';
 
 const categories = ['All', 'Mobile', 'Web', 'Backend', 'AI/Marketing'];
@@ -85,7 +86,7 @@ const Projects = () => {
       {/* Readability overlay */}
       <div className="absolute inset-0 -z-15 bg-black/35 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6">
+      <SectionBorderReveal className="max-w-7xl mx-auto" innerClassName="px-6 md:px-8 py-8 md:py-10">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
             Our <span className="gradient-text">Projects</span>
@@ -129,7 +130,7 @@ const Projects = () => {
             ))}
           </AnimatePresence>
         </motion.div>
-      </div>
+      </SectionBorderReveal>
     </div>
   );
 };

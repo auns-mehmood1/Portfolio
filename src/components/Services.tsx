@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { sectionVariants, itemVariants } from '../lib/motion';
+import SectionBorderReveal from './SectionBorderReveal';
 
 const services = [
   {
@@ -67,7 +68,7 @@ const Services = () => {
       whileInView="visible"
       viewport={{ once: true }}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <SectionBorderReveal className="max-w-7xl mx-auto" innerClassName="px-6 md:px-8 py-8 md:py-10">
         <div className="text-center mb-16">
           <motion.h2 
             variants={itemVariants}
@@ -112,7 +113,7 @@ const Services = () => {
             </motion.div>
           ))}
         </div>
-      </div>
+      </SectionBorderReveal>
     </motion.section>
   );
 };
