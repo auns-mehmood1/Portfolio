@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from 'motion/react';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import TechStack from '../components/TechStack';
@@ -8,28 +8,36 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { sectionVariants, itemVariants } from '../lib/motion';
 
-const AnimatedPercent = ({ value }: { value: number }) => {
+const AnimatedPercent = ({ value, start }: { value: number; start: boolean }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const duration = 1600;
-    const start = performance.now();
+    if (!start) {
+      setCount(0);
+      return;
+    }
+
+    const duration = 2000;
+    const startTime = performance.now();
     let rafId = 0;
 
     const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
+      const progress = Math.min((now - startTime) / duration, 1);
       setCount(Math.floor(progress * value));
       if (progress < 1) rafId = requestAnimationFrame(tick);
     };
 
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, [value]);
+  }, [start, value]);
 
   return <>{count}%</>;
 };
 
 const Home = () => {
+  const aboutImageRef = useRef<HTMLDivElement | null>(null);
+  const isAboutImageInView = useInView(aboutImageRef, { once: true, amount: 0.35 });
+
   return (
     <div className="pt-20">
       <Hero />
@@ -47,6 +55,7 @@ const Home = () => {
           <motion.div
             variants={itemVariants}
             className="relative"
+            ref={aboutImageRef}
           >
             <div className="aspect-square rounded-3xl overflow-hidden gradient-border">
               <div className="gradient-border-inner flex items-center justify-center p-8">
@@ -60,7 +69,7 @@ const Home = () => {
             </div>
             {/* Stats Overlay */}
             <div className="absolute -bottom-6 -right-6 glass-card p-6 shadow-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20">
-              <div className="text-3xl font-bold gradient-text"><AnimatedPercent value={95} /></div>
+              <div className="text-3xl font-bold gradient-text"><AnimatedPercent value={95} start={isAboutImageInView} /></div>
               <div className="text-xs text-[color:var(--text-faint)] uppercase tracking-widest">Client Satisfaction</div>
             </div>
           </motion.div>
