@@ -40,7 +40,7 @@ const Contact = () => {
                 { 
                   icon: MapPin, 
                   title: 'Visit Us', 
-                  value: '123 Innovation Way, Tech City',
+                  value: '1 A sandy hill road Woolwich, Greater London SE186SA',
                   desc: 'Come say hello at our office.'
                 }
               ].map((item, idx) => (
@@ -51,7 +51,7 @@ const Contact = () => {
                   transition={{ delay: 0.2 + idx * 0.1 }}
                   className="flex gap-6 group"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-black/5 border border-black/10 dark:bg-white/5 dark:border-white/10 flex items-center justify-center group-hover:bg-brand-purple/20 group-hover:border-brand-purple/50 transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-brand-purple/20 group-hover:border-brand-purple/50 transition-all">
                     <item.icon className="text-brand-purple" size={24} />
                   </div>
                   <div>

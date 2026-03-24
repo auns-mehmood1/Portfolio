@@ -10,6 +10,7 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { sectionVariants, itemVariants } from '../lib/motion';
 
 const services = [
   {
@@ -58,22 +59,24 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-24 bg-dark-bg relative overflow-hidden">
+    <motion.section
+      id="services"
+      className="py-24 bg-dark-bg relative overflow-hidden"
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            variants={itemVariants}
             className="text-3xl md:text-5xl font-display font-bold mb-4"
           >
             Our <span className="gradient-text">Expertise</span>
           </motion.h2>
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            variants={itemVariants}
             className="text-[color:var(--text-muted)] max-w-2xl mx-auto"
           >
             We provide comprehensive digital solutions tailored to your business needs. 
@@ -85,12 +88,10 @@ const Services = () => {
           {services.map((service, idx) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="glass-card p-8 group hover:border-brand-purple/50 transition-colors"
+              variants={itemVariants}
+              transition={{ delay: idx * 0.08 }}
+              whileHover={{ y: -8, scale: 1.03, rotateX: 1, rotateY: -1 }}
+              className="glass-card p-8 group bg-gradient-to-br from-purple-900/20 to-blue-900/20 hover:border-brand-purple/50 hover:shadow-[0_18px_45px_rgba(59,130,246,0.22)] transition-all duration-300 hover:scale-[1.03]"
             >
               <div className={`w-14 h-14 rounded-xl ${service.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                 <service.icon className={service.color} size={28} />
@@ -112,7 +113,7 @@ const Services = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

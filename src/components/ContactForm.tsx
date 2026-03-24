@@ -12,23 +12,40 @@ const ContactForm = () => {
     e.preventDefault();
     if (!formRef.current) return;
 
-    setStatus('loading');
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-    // NOTE: Replace these with your actual EmailJS keys
-    // SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY
+    if (!serviceId || !templateId || !publicKey) {
+      setStatus('error');
+      setErrorMessage('Email service is not configured. Please try again shortly.');
+      return;
+    }
+
+    setStatus('loading');
+    setErrorMessage('');
+
     emailjs.sendForm(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      serviceId,
+      templateId,
       formRef.current,
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      publicKey
     )
       .then(() => {
         setStatus('success');
         formRef.current?.reset();
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
+        const fallback = 'Something went wrong. Please try again later.';
+        const message =
+          typeof error === 'object' &&
+          error !== null &&
+          'text' in error &&
+          typeof (error as { text?: string }).text === 'string'
+            ? (error as { text: string }).text
+            : fallback;
         setStatus('error');
-        setErrorMessage('Something went wrong. Please try again later.');
+        setErrorMessage(message || fallback);
       });
   };
 

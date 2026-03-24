@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { ChevronRight, Play, ArrowRight } from 'lucide-react';
+import { ChevronRight, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '../lib/utils';
+import { sectionVariants, itemVariants } from '../lib/motion';
 
 const Hero = () => {
   const heroVideoUrl = '/videos/hero-background.mp4';
@@ -39,19 +40,21 @@ const Hero = () => {
       </div>
 
       {/* Readability overlay on top of video */}
-      <div className="absolute inset-0 -z-15 bg-black/10 dark:bg-black/35 pointer-events-none" />
+      <div className="absolute inset-0 -z-15 bg-black/35 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <motion.div
+        className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={itemVariants}
         >
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 border border-black/10 dark:bg-white/5 dark:border-white/10 text-brand-purple text-sm font-medium mb-6"
+            variants={itemVariants}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-brand-purple text-sm font-medium mb-6"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-purple opacity-75"></span>
@@ -83,9 +86,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          variants={itemVariants}
           className="relative"
         >
           {/* 3D-like Service Cards */}
@@ -98,13 +99,15 @@ const Hero = () => {
             ].map((item, idx) => (
               <motion.div
                 key={item.title}
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5 + idx * 0.1 }}
-                whileHover={{ y: -5, scale: 1.02 }}
+                variants={itemVariants}
+                transition={{ delay: 0.15 + idx * 0.06 }}
+                whileHover={{ y: -10, scale: 1.04, rotateZ: -0.6 }}
+                whileTap={{ scale: 0.99 }}
                 className={cn(
-                  "glass-card p-6 flex flex-col items-center justify-center text-center gap-3 group cursor-default",
-                  "bg-gradient-to-br to-transparent",
+                  "p-6 flex flex-col items-center justify-center text-center gap-3 group cursor-default rounded-2xl",
+                  "border border-white/10 backdrop-blur-xl",
+                  "bg-gradient-to-br from-white/10 via-white/5 to-transparent",
+                  "hover:border-white/20 hover:shadow-[0_18px_55px_rgba(139,92,246,0.22)] transition-all duration-300 will-change-transform",
                   item.color
                 )}
               >
@@ -118,7 +121,7 @@ const Hero = () => {
           <div className="absolute -top-10 -right-10 w-32 h-32 bg-brand-purple/30 blur-3xl rounded-full animate-pulse" />
           <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-brand-blue/30 blur-3xl rounded-full animate-pulse" />
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
@@ -6,6 +6,28 @@ import TechStack from '../components/TechStack';
 import Testimonials from '../components/Testimonials';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { sectionVariants, itemVariants } from '../lib/motion';
+
+const AnimatedPercent = ({ value }: { value: number }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const duration = 1600;
+    const start = performance.now();
+    let rafId = 0;
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      setCount(Math.floor(progress * value));
+      if (progress < 1) rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, [value]);
+
+  return <>{count}%</>;
+};
 
 const Home = () => {
   return (
@@ -13,12 +35,17 @@ const Home = () => {
       <Hero />
       
       {/* About Section */}
-      <section id="about" className="py-24 relative">
+      <motion.section
+        id="about"
+        className="py-24 relative"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            variants={itemVariants}
             className="relative"
           >
             <div className="aspect-square rounded-3xl overflow-hidden gradient-border">
@@ -32,16 +59,14 @@ const Home = () => {
               </div>
             </div>
             {/* Stats Overlay */}
-            <div className="absolute -bottom-6 -right-6 glass-card p-6 shadow-2xl">
-              <div className="text-3xl font-bold gradient-text">99%</div>
+            <div className="absolute -bottom-6 -right-6 glass-card p-6 shadow-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20">
+              <div className="text-3xl font-bold gradient-text"><AnimatedPercent value={95} /></div>
               <div className="text-xs text-[color:var(--text-faint)] uppercase tracking-widest">Client Satisfaction</div>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            variants={itemVariants}
           >
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
               Innovation <span className="gradient-text">Meets</span> Execution
@@ -72,23 +97,27 @@ const Home = () => {
             </Link>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       <Services />
       <TechStack />
       <Testimonials />
 
       {/* CTA Section */}
-      <section className="py-24">
+      <motion.section
+        className="py-24"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <div className="max-w-7xl mx-auto px-6">
           <div className="relative rounded-[2rem] overflow-hidden p-12 md:p-20 text-center">
             <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/20 via-brand-blue/20 to-brand-green/20 -z-10" />
             <div className="absolute inset-0 bg-dark-card/80 backdrop-blur-xl -z-20" />
             
             <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              variants={itemVariants}
               className="text-4xl md:text-6xl font-display font-bold mb-6"
             >
               Let's build something <br />
@@ -103,7 +132,7 @@ const Home = () => {
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };

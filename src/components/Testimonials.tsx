@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Quote, Star } from 'lucide-react';
+import { sectionVariants, itemVariants } from '../lib/motion';
 
 const testimonials = [
   {
@@ -28,26 +29,31 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-24 bg-dark-bg relative overflow-hidden">
+    <motion.section
+      className="py-24 bg-dark-bg relative overflow-hidden"
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div variants={itemVariants} className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
             Client <span className="gradient-text">Feedback</span>
           </h2>
           <p className="text-[color:var(--text-muted)] max-w-2xl mx-auto">
             Don't just take our word for it. Here's what our clients have to say about working with us.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((t, idx) => (
             <motion.div
               key={t.name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="glass-card p-8 relative"
+              variants={itemVariants}
+              transition={{ delay: idx * 0.08 }}
+              whileHover={{ y: -8, scale: 1.03, rotateX: 1, rotateY: -1 }}
+              className="glass-card p-8 relative bg-gradient-to-br from-purple-900/20 to-blue-900/20 transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_20px_45px_rgba(139,92,246,0.2)]"
             >
               <Quote className="absolute top-6 right-8 text-[color:var(--text-decorative)] w-12 h-12" />
               <div className="flex gap-1 mb-6">
@@ -71,7 +77,7 @@ const Testimonials = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

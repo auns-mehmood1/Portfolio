@@ -14,41 +14,19 @@
 }
 
 :root {
-  /* Light theme defaults (Tailwind classes reuse these tokens). */
-  --color-dark-bg: #f8fafc;
-  --color-dark-card: #ffffff;
-  --color-dark-border: rgba(0, 0, 0, 0.1);
-  --color-foreground: #050505;
-
-  /* Semantic text tokens */
-  --text-primary: #050505;
-  --text-secondary: rgba(5, 5, 5, 0.7);
-  --text-muted: rgba(5, 5, 5, 0.6);
-  --text-faint: rgba(5, 5, 5, 0.4);
-  --text-disabled: rgba(5, 5, 5, 0.25);
-  --text-decorative: rgba(0, 0, 0, 0.05);
-  --text-inverse: #ffffff;
-
-  /* Semantic form field tokens */
-  --field-bg: rgba(255, 255, 255, 0.9);
-  --field-border: rgba(0, 0, 0, 0.18);
-  --field-border-hover: rgba(0, 0, 0, 0.28);
-  --field-border-focus: rgba(139, 92, 246, 0.55);
-}
-
-.dark {
-  /* Dark theme overrides. */
   --color-dark-bg: #050505;
   --color-dark-card: #0a0a0a;
   --color-dark-border: rgba(255, 255, 255, 0.1);
   --color-foreground: #ffffff;
 
+  /* Semantic text tokens */
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.8);
   --text-muted: rgba(255, 255, 255, 0.6);
   --text-faint: rgba(255, 255, 255, 0.4);
   --text-disabled: rgba(255, 255, 255, 0.25);
   --text-decorative: rgba(255, 255, 255, 0.05);
+  --text-inverse: #ffffff;
 
   /* Semantic form field tokens */
   --field-bg: rgba(255, 255, 255, 0.04);
@@ -92,7 +70,7 @@
 
   .btn-secondary {
     @apply px-8 py-3 rounded-full font-medium transition-all duration-300 
-           border border-black/10 hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/5
+           border border-white/10 hover:bg-white/5
            text-[color:var(--text-primary)]
            active:scale-95;
   }
