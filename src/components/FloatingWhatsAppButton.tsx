@@ -14,7 +14,7 @@ export default function FloatingWhatsAppButton() {
       className="fixed bottom-6 right-6 z-[70] inline-flex w-10 h-10 items-center justify-center rounded-full bg-[#25D366] text-[color:var(--text-inverse)] shadow-lg shadow-black/40 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_28px_rgba(37,211,102,0.55)] active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-dark-bg"
     >
       <span className="sr-only">WhatsApp</span>
-      <svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+      <svg height="auto" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
         viewBox="0 0 512 512" xmlSpace="preserve">
         <path fill="#20A83E" d="M437.019,74.98C388.668,26.628,324.38,0,256,0S123.333,26.628,74.98,74.98S0,187.62,0,256
 	c0,51.485,15.154,100.938,43.874,143.34L0.69,500.106c-1.343,3.134-0.607,6.966,1.798,9.381c2.495,2.506,6.519,3.206,9.714,1.684
